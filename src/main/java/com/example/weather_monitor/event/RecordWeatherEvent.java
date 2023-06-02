@@ -1,12 +1,14 @@
 package com.example.weather_monitor.event;
 
 
-public record WeatherEvent(float temperature, boolean isWindy) {
+import com.example.weather_monitor.db.Country;
+
+public record RecordWeatherEvent(Country country) {
+
     @Override
     public String toString() {
-        return "WeatherEvent{" +
-                "temperature=" + temperature +
-                ", isWindy=" + isWindy +
+        return "RecordWeatherEvent{" +
+                "country=" + country +
                 '}';
     }
 }
