@@ -1,6 +1,5 @@
 package com.example.weather_monitor;
 
-import com.example.weather_monitor.event.RecordWeatherEvent;
 import com.example.weather_monitor.event.RegisterWeatherEvent;
 import com.example.weather_monitor.listener.CountryThreadsListener;
 import com.example.weather_monitor.listener.RegisterListener;
