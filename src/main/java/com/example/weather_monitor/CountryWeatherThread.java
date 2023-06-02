@@ -36,4 +36,8 @@ public class CountryWeatherThread extends Thread {
     public void stopThread() {
         running = false;
     }
+
+    public Country getCountry() {
+        return country;
+    }
 }

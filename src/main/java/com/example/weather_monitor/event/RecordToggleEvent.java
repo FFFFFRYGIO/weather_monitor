@@ -3,12 +3,11 @@ package com.example.weather_monitor.event;
 import com.example.weather_monitor.db.Country;
 
 /* Event to parse country weather recorder change */
-public record RecordToggleEvent(Country country, boolean toggle) {
+public record RecordToggleEvent(Country country) {
     @Override
     public String toString() {
         return "CountryWeatherEvent{" +
                 "country=" + country +
-                ", toggle=" + toggle +
                 '}';
     }
 }

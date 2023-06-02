@@ -1,6 +1,7 @@
 package com.example.weather_monitor;
 
 import com.example.weather_monitor.db.Country;
+import com.example.weather_monitor.event.RecordToggleEvent;
 import com.example.weather_monitor.listener.CountryThreadsManageListener;
 import com.example.weather_monitor.listener.RegisterListener;
 import com.example.weather_monitor.listener.WeatherUpdatesListener;
@@ -11,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelloApplication extends Application {
     @Override
@@ -50,8 +53,43 @@ public class HelloApplication extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
 
-        System.out.println("DONE");
+    public static void CountryWeatherTogglingExample(CentralEventBus centralEventBus) {
+
+        /*
+        1. Start Poland
+        2. Stop Poland
+        3. Start Germany
+        4. Start Poland
+        5. Stop Germany
+        6. Stop Poland
+        */
+
+        List<RecordToggleEvent> recordToggleEvents = new ArrayList<>();
+        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
+        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
+        recordToggleEvents.add(new RecordToggleEvent(Country.Germany));
+        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
+        recordToggleEvents.add(new RecordToggleEvent(Country.Germany));
+        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
+
+        int x = 0;
+        long startTime = System.currentTimeMillis();
+
+        for(RecordToggleEvent recordToggleEvent : recordToggleEvents) {
+
+            System.out.println(x + "Beggin " + (System.currentTimeMillis() - startTime));
+
+            centralEventBus.publishEventFromListener(recordToggleEvent);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println(x++ + "End " + (System.currentTimeMillis() - startTime) + "\n\n");
+        }
     }
 
     public static void main(String[] args) {
@@ -61,7 +99,8 @@ public class HelloApplication extends Application {
         CentralEventBus centralEventBus = new CentralEventBus();
 
         // CountryThreadsListener
-        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener();
+        int generalPeriod = 250;
+        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, generalPeriod);
         centralEventBus.registerNewListener(countryThreadsManageListener);
 
         // WeatherUpdatesListener
@@ -72,9 +111,15 @@ public class HelloApplication extends Application {
         RegisterListener registerListener = new RegisterListener();
         centralEventBus.registerNewListener(registerListener);
 
-        // Simple walkthrough that shows how Threads works
+        // Simple steps that shows how threads works
         // ThreadWorkingExample(centralEventBus);
 
+        // Simple steps that shows how starting/stopping threads works
+        // CountryWeatherTogglingExample(centralEventBus);
 
+        // Simple steps that shows how changing register options works
+        // TODO: After the database and register will work, implement events for changing options
+
+        System.out.println("DONE");
     }
 }
