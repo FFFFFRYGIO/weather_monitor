@@ -1,7 +1,7 @@
 package com.example.weather_monitor;
 
-import com.example.weather_monitor.event.RegisterWeatherEvent;
-import com.example.weather_monitor.listener.CountryThreadsListener;
+import com.example.weather_monitor.db.Country;
+import com.example.weather_monitor.listener.CountryThreadsManageListener;
 import com.example.weather_monitor.listener.RegisterListener;
 import com.example.weather_monitor.listener.WeatherUpdatesListener;
 import javafx.application.Application;
@@ -31,8 +31,8 @@ public class HelloApplication extends Application {
         CentralEventBus centralEventBus = new CentralEventBus();
 
         // CountryThreadsListener
-        CountryThreadsListener countryThreadsListener = new CountryThreadsListener();
-        centralEventBus.registerNewListener(countryThreadsListener);
+        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener();
+        centralEventBus.registerNewListener(countryThreadsManageListener);
 
         // WeatherUpdatesListener
         WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
@@ -42,8 +42,31 @@ public class HelloApplication extends Application {
         RegisterListener registerListener = new RegisterListener();
         centralEventBus.registerNewListener(registerListener);
 
-        // Testing events
-        CountryWeatherThread countryWeatherThread = new CountryWeatherThread(centralEventBus);
-        countryWeatherThread.publishEvent(new RegisterWeatherEvent(11.11F, true));
+        // Testing creating threads for counties
+        CountryWeatherThread countryWeatherThread = new CountryWeatherThread(centralEventBus, Country.Poland, 500);
+        CountryWeatherThread countryWeatherThread2 = new CountryWeatherThread(centralEventBus, Country.Germany, 700);
+        countryWeatherThread.start();
+        countryWeatherThread2.start();
+
+        // Let the threads work for a while
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Stop threads
+        countryWeatherThread.stopThread();
+        countryWeatherThread2.stopThread();
+
+        // Wait for threads to finish
+        try {
+            countryWeatherThread.join();
+            countryWeatherThread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println("DONE");
     }
 }

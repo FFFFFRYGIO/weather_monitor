@@ -9,7 +9,6 @@ public class RegisterListener {
 
     @Subscribe
     public void handleEvent(RegisterConfigEvent event) {
-        System.out.println("RegisterListener new event number " + eventsHandled++);
-        System.out.println("Event: " + event.toString());
+        System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());
     }
 }

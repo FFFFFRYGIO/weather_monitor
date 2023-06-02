@@ -9,6 +9,7 @@ import java.time.Instant;
 
 @Entity
 @Data
+/* Weather record model for database */
 public class WeatherRecord {
     @Id
     @GeneratedValue
