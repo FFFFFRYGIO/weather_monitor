@@ -24,23 +24,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        // launch();
-
-        // CentralEventBus
-        CentralEventBus centralEventBus = new CentralEventBus();
-
-        // CountryThreadsListener
-        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener();
-        centralEventBus.registerNewListener(countryThreadsManageListener);
-
-        // WeatherUpdatesListener
-        WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
-        centralEventBus.registerNewListener(weatherUpdatesListener);
-
-        // RegisterListener
-        RegisterListener registerListener = new RegisterListener();
-        centralEventBus.registerNewListener(registerListener);
+    public static void ThreadWorkingExample(CentralEventBus centralEventBus) {
 
         // Testing creating threads for counties
         CountryWeatherThread countryWeatherThread = new CountryWeatherThread(centralEventBus, Country.Poland, 500);
@@ -66,7 +50,31 @@ public class HelloApplication extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         System.out.println("DONE");
+    }
+
+    public static void main(String[] args) {
+        // launch();
+
+        // CentralEventBus
+        CentralEventBus centralEventBus = new CentralEventBus();
+
+        // CountryThreadsListener
+        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener();
+        centralEventBus.registerNewListener(countryThreadsManageListener);
+
+        // WeatherUpdatesListener
+        WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
+        centralEventBus.registerNewListener(weatherUpdatesListener);
+
+        // RegisterListener
+        RegisterListener registerListener = new RegisterListener();
+        centralEventBus.registerNewListener(registerListener);
+
+        // Simple walkthrough that shows how Threads works
+        // ThreadWorkingExample(centralEventBus);
+
+
     }
 }
