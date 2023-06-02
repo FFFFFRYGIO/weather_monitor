@@ -1,7 +1,9 @@
 package com.example.weather_monitor;
 
-import com.example.weather_monitor.event.WeatherEvent;
+import com.example.weather_monitor.event.RecordWeatherEvent;
+import com.example.weather_monitor.event.RegisterWeatherEvent;
 import com.example.weather_monitor.listener.CountryThreadsListener;
+import com.example.weather_monitor.listener.RegisterListener;
 import com.example.weather_monitor.listener.WeatherUpdatesListener;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,15 +28,23 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         // launch();
 
+        // CentralEventBus
         CentralEventBus centralEventBus = new CentralEventBus();
+
+        // CountryThreadsListener
         CountryThreadsListener countryThreadsListener = new CountryThreadsListener();
         centralEventBus.registerNewListener(countryThreadsListener);
+
+        // WeatherUpdatesListener
         WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
         centralEventBus.registerNewListener(weatherUpdatesListener);
 
+        // RegisterListener
+        RegisterListener registerListener = new RegisterListener();
+        centralEventBus.registerNewListener(registerListener);
+
+        // Testing events
         CountryWeatherThread countryWeatherThread = new CountryWeatherThread(centralEventBus);
-        countryWeatherThread.publishEvent("test1 message1");
-        countryWeatherThread.publishEvent("test2 message2");
-        countryWeatherThread.publishEvent(new WeatherEvent(11.11F, true));
+        countryWeatherThread.publishEvent(new RegisterWeatherEvent(11.11F, true));
     }
 }
