@@ -1,6 +1,6 @@
 package com.example.weather_monitor;
 
-import com.example.weather_monitor.db.Country;
+import com.example.weather_monitor.data.Country;
 import com.example.weather_monitor.event.RecordToggleEvent;
 import com.example.weather_monitor.listener.CountryThreadsManageListener;
 import com.example.weather_monitor.listener.RegisterListener;

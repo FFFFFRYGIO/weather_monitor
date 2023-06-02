@@ -1,7 +1,7 @@
 package com.example.weather_monitor;
 
-import com.example.weather_monitor.db.Country;
-import com.example.weather_monitor.event.WeatherEvent;
+import com.example.weather_monitor.data.Country;
+import com.example.weather_monitor.event.WeatherRecordEvent;
 
 /* Thread class that will gather the weather update from api and parse to the application */
 public class CountryWeatherThread extends Thread {
@@ -16,9 +16,18 @@ public class CountryWeatherThread extends Thread {
         this.period = period;
     }
 
+    public WeatherRecordEvent generateEvent() {
+        // get data from API
+        // TODO: Get data from API (by parsing only country)
+        Country country1 = country;
+        float temperature1 = 11.11F;
+        boolean isWindy1 = true;
+
+        return new WeatherRecordEvent(country, temperature1, isWindy1);
+    }
+
     public void publishEvent() {
-        WeatherEvent event = new WeatherEvent(country, 11.11F, true);
-        centralEventBus.publishEventFromListener(event);
+        centralEventBus.publishEventFromListener(generateEvent());
     }
 
     @Override

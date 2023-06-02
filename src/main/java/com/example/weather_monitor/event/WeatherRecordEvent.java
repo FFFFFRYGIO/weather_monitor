@@ -1,9 +1,9 @@
 package com.example.weather_monitor.event;
 
-import com.example.weather_monitor.db.Country;
+import com.example.weather_monitor.data.Country;
 
 /* Event to parse new weather register */
-public record WeatherEvent(Country country, float temperature, boolean isWindy) {
+public record WeatherRecordEvent(Country country, float temperature, boolean isWindy) {
     @Override
     public String toString() {
         return "RegisterWeatherEvent{" +

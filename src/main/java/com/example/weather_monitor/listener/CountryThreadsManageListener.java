@@ -2,9 +2,7 @@ package com.example.weather_monitor.listener;
 
 import com.example.weather_monitor.CentralEventBus;
 import com.example.weather_monitor.CountryWeatherThread;
-import com.example.weather_monitor.db.Country;
 import com.example.weather_monitor.event.RecordToggleEvent;
-import com.example.weather_monitor.event.WeatherEvent;
 import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;

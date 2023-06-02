@@ -10,5 +10,10 @@ public class RegisterListener {
     @Subscribe
     public void handleEvent(RegisterConfigEvent event) {
         System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());
+        // TODO: start is running thread that gathers rows from database and prints them
+        // TODO: stop is stopping updating
+        // TODO: clear is clearing the viewed output
+        // TODO: optimize updating: print only new rows and maybe do scrolling (hide oldest, print new)
+        // TODO: be careful while clearing: it needs also clear the structure resposible for printing
     }
 }

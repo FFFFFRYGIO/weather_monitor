@@ -1,5 +1,6 @@
 package com.example.weather_monitor.db;
 
+import com.example.weather_monitor.data.Country;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

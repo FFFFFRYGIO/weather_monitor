@@ -1,4 +1,4 @@
-package com.example.weather_monitor.db;
+package com.example.weather_monitor.data;
 
 /* List of options for register event to parse options changes */
 public enum RegisterOption {
