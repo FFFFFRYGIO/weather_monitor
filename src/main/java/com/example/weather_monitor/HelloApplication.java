@@ -19,9 +19,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Image icon = new Image(System.getProperty("user.dir") + "\\src\\images\\icon.jpg");
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
-        stage.setTitle("Hello!");
+        Image icon = new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\icon.jpg");
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 492);
+        stage.setTitle("Europe Weather Monitor");
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
@@ -93,33 +93,33 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        // launch();
+        launch();
 
-        // CentralEventBus
-        CentralEventBus centralEventBus = new CentralEventBus();
-
-        // CountryThreadsListener
-        int generalPeriod = 250;
-        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, generalPeriod);
-        centralEventBus.registerNewListener(countryThreadsManageListener);
-
-        // WeatherUpdatesListener
-        WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
-        centralEventBus.registerNewListener(weatherUpdatesListener);
-
-        // RegisterListener
-        RegisterListener registerListener = new RegisterListener();
-        centralEventBus.registerNewListener(registerListener);
-
-        // Simple steps that shows how threads works
-        // ThreadWorkingExample(centralEventBus);
-
-        // Simple steps that shows how starting/stopping threads works
-        CountryWeatherTogglingExample(centralEventBus);
-
-        // Simple steps that shows how changing register options works
-        // TODO: After the database and register will work, implement events for changing options
-
-        System.out.println("DONE");
+//        // CentralEventBus
+//        CentralEventBus centralEventBus = new CentralEventBus();
+//
+//        // CountryThreadsListener
+//        int generalPeriod = 250;
+//        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, generalPeriod);
+//        centralEventBus.registerNewListener(countryThreadsManageListener);
+//
+//        // WeatherUpdatesListener
+//        WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
+//        centralEventBus.registerNewListener(weatherUpdatesListener);
+//
+//        // RegisterListener
+//        RegisterListener registerListener = new RegisterListener();
+//        centralEventBus.registerNewListener(registerListener);
+//
+//        // Simple steps that shows how threads works
+//        // ThreadWorkingExample(centralEventBus);
+//
+//        // Simple steps that shows how starting/stopping threads works
+//        CountryWeatherTogglingExample(centralEventBus);
+//
+//        // Simple steps that shows how changing register options works
+//        // TODO: After the database and register will work, implement events for changing options
+//
+//        System.out.println("DONE");
     }
 }

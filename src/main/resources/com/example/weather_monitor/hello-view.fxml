@@ -1,15 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="1000.0" prefWidth="1000.0" spacing="20.0" style="-fx-background-image: url(europe_map.jpg);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weather_monitor.HelloController">
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-   <ImageView fx:id="europe_map" fitHeight="769.0" fitWidth="943.0" pickOnBounds="true" preserveRatio="true" />
-
-   <Label fx:id="welcomeText" text="Radek" />
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weather_monitor.HelloController">
+   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="1000.0">
+      <children>
+         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="1000.0">
+            <children>
+               <ImageView fitHeight="472.0" fitWidth="680.0" pickOnBounds="true" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+                  <image>
+                     <Image url="@images/europe_map.png" />
+                  </image>
+               </ImageView>
+               <VBox alignment="TOP_CENTER" prefHeight="580.0" prefWidth="280.0">
+                  <children>
+                     <TextField fx:id="registerPrompt" alignment="TOP_LEFT" prefHeight="419.0" prefWidth="280.0" text="1" />
+                     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <children>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage register">
+                              <VBox.margin>
+                                 <Insets left="10.0" right="10.0" top="5.0" />
+                              </VBox.margin>
+                           </Text>
+                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                              <children>
+                                 <Button fx:id="startStopRegisterButton" minWidth="100.0" mnemonicParsing="false" onAction="#startStopRegisterButtonHandle" text="Start/Stop" />
+                                 <Button fx:id="clearRegisterButton" minWidth="100.0" mnemonicParsing="false" onAction="#clearRegisterButtonHandle" text="Clear" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </VBox.margin>
+                           </HBox>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monitored countries:">
+                              <VBox.margin>
+                                 <Insets left="10.0" right="10.0" />
+                              </VBox.margin>
+                           </Text>
+                           <TextArea fx:id="monitoredCountriesPrompt" prefHeight="22.0" prefWidth="280.0" />
+                        </children>
+                     </VBox>
+                  </children>
+                  <HBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </HBox.margin>
+               </VBox>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+   <AnchorPane layoutX="14.0" layoutY="13.0" prefHeight="472.0" prefWidth="680.0">
+      <children>
+         <Button fx:id="buttonGermany" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Germany" />
+         <Button fx:id="buttonPoland" layoutX="480.0" layoutY="140.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Poland" />
+         <Button fx:id="buttonLithuania" layoutX="600.0" layoutY="14.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Lithuania" />
+         <Button fx:id="buttonCzechia" layoutX="350.0" layoutY="250.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Czechia" />
+         <Button fx:id="buttonNetherlands" layoutX="67.0" layoutY="128.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Netherlands" />
+         <Button fx:id="buttonBelgium" layoutX="37.0" layoutY="200.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belgium" />
+         <Button fx:id="buttonFrance" layoutX="37.0" layoutY="334.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="France" />
+         <Button fx:id="buttonSwitzerland" layoutX="137.0" layoutY="378.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Switzerland" />
+         <Button fx:id="buttonAustia" layoutX="340.0" layoutY="347.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Austria" />
+         <Button fx:id="buttonHungary" layoutX="486.0" layoutY="372.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Hungary" />
+         <Button fx:id="buttonSlovenia" layoutX="350.0" layoutY="415.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovenia" />
+         <Button fx:id="buttonItaly" layoutX="254.0" layoutY="428.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Italy" />
+         <Button fx:id="buttonLuxembourg" layoutX="75.0" layoutY="250.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Luxembourg" />
+         <Button fx:id="buttonCroatia" layoutX="411.0" layoutY="441.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Croatia" />
+         <Button fx:id="buttonSerbia" layoutX="509.0" layoutY="429.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Serbia" />
+         <Button fx:id="buttonRomania" layoutX="589.0" layoutY="403.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Romania" />
+         <Button fx:id="buttonUkraine" layoutX="609.0" layoutY="278.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Ukraine" />
+         <Button fx:id="buttonBelarus" layoutX="610.0" layoutY="116.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belarus" />
+         <Button fx:id="buttonDenmark" layoutX="182.0" layoutY="14.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Denmark" />
+         <Button fx:id="buttonSlovakia" layoutX="479.0" layoutY="297.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovakia" />
+      </children>
+   </AnchorPane>
+</AnchorPane>

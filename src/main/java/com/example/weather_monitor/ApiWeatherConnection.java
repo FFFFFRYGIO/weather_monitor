@@ -35,7 +35,7 @@ public class ApiWeatherConnection {
     public static void main(String[] args) {
         // Sample testing if everything works
 
-        Country country = Country.Poland;
+        Country country = Country.Czechia;
 
         WeatherRecord weatherRecord = getWeatherData(country);
 
@@ -69,7 +69,13 @@ public class ApiWeatherConnection {
             JSONObject mainObject = jsonObject.getJSONObject("main");
             WeatherRecord weatherRecord = new WeatherRecord();
 
-            weatherRecord.location = Country.valueOf(jsonObject.getString("name"));
+            String countryString = jsonObject.getString("name");
+            switch (countryString) {
+                case "Luxembourg Province" -> countryString = "Luxembourg";
+                case "Czech Republic" -> countryString = "Czechia";
+                case "Republic of Lithuania" -> countryString = "Lithuania";
+            }
+            weatherRecord.location = Country.valueOf(countryString);
             var timestamp = Instant.ofEpochSecond(jsonObject.getLong("dt"));
             weatherRecord.measurementTime = LocalDateTime.ofInstant(timestamp, ZoneId.systemDefault());
             weatherRecord.weatherCondition = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main");
