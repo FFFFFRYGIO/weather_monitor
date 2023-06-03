@@ -29,8 +29,6 @@ public class CountryWeatherThread extends Thread {
     @Override
     public void run() {
         while (running) {
-            // TODO: adding record to database
-            // TODO: do both of those things asynchronous, its required
             publishEvent();
             try {
                 Thread.sleep(period);

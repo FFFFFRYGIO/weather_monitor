@@ -89,18 +89,23 @@ public class ApiWeatherConnection {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
 
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+
+                reader.close();
+                connection.disconnect();
+
+                return response.toString();
+            } else {
+                System.out.println("Failed to retrieve weather data. Response code: " + responseCode);
             }
-
-            reader.close();
-            connection.disconnect();
-
-            return response.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
