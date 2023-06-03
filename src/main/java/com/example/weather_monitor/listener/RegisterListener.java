@@ -6,6 +6,9 @@ import com.example.weather_monitor.db.db_dummy;
 import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.google.common.eventbus.Subscribe;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
@@ -15,7 +18,16 @@ import static com.example.weather_monitor.data.RegisterOption.*;
 /* Listener for register to manage changing its options */
 public class RegisterListener {
     static db_dummy dummy = new db_dummy();
-    private static Thread recordingThread;
+    private static final Thread recordingThread = new Thread(() -> {
+        while (!Thread.currentThread().isInterrupted()) {
+            printRecords();
+            try {
+                Thread.sleep(1000); // Wait for 1 second
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    });
     private static int eventsHandled = 0;
 
     private static List<WeatherRecord> getRecords() {
@@ -40,21 +52,11 @@ public class RegisterListener {
     }
 
     private static void startRecording() {
-        recordingThread = new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                printRecords();
-                try {
-                    Thread.sleep(1000); // Wait for 1 second
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
-        });
         recordingThread.start();
     }
 
     private static void stopRecording() {
-        if (recordingThread != null && recordingThread.isAlive()) {
+        if (recordingThread.isAlive()) {
             recordingThread.interrupt();
             try {
                 recordingThread.join();
@@ -93,8 +95,13 @@ public class RegisterListener {
         System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());
 
         switch (event.option()) {
-            case start_register -> startRecording();
-            case stop_register -> stopRecording();
+            case toggle_register -> {
+                if(recordingThread.isAlive()) {
+                    stopRecording();
+                } else {
+                    startRecording();
+                }
+            }
             case clear_register -> clearAllRecordings();
             default -> throw new IllegalArgumentException("Wrong option: " + event.option());
         }
