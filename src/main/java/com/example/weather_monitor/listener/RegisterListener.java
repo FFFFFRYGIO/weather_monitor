@@ -1,19 +1,12 @@
 package com.example.weather_monitor.listener;
 
-import com.example.weather_monitor.db.Connector;
 import com.example.weather_monitor.db.WeatherRecord;
 import com.example.weather_monitor.db.db_dummy;
 import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.google.common.eventbus.Subscribe;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 import java.io.IOException;
-import java.sql.*;
 import java.util.List;
-
-import static com.example.weather_monitor.data.RegisterOption.*;
 
 /* Listener for register to manage changing its options */
 public class RegisterListener {

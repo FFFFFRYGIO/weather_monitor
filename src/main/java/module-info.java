@@ -9,7 +9,12 @@ module com.example.weather_monitor {
     requires lombok;
     requires org.json;
     requires com.google.gson;
+    requires org.hibernate.orm.core;
+    requires java.naming;
 
+    exports com.example.weather_monitor.data;
+    exports com.example.weather_monitor.db;
+    opens com.example.weather_monitor.db to org.hibernate.orm.core;
     opens com.example.weather_monitor to javafx.fxml;
     exports com.example.weather_monitor;
     exports com.example.weather_monitor.listener;
