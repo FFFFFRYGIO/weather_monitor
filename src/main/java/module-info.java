@@ -7,6 +7,8 @@ module com.example.weather_monitor {
     requires com.google.common;
     requires jakarta.persistence;
     requires lombok;
+    requires org.json;
+    requires com.google.gson;
 
     opens com.example.weather_monitor to javafx.fxml;
     exports com.example.weather_monitor;
