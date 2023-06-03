@@ -1,6 +1,7 @@
 package com.example.weather_monitor;
 
 import com.example.weather_monitor.data.Country;
+import com.example.weather_monitor.db.WeatherRecord;
 import com.example.weather_monitor.event.WeatherRecordEvent;
 
 /* Thread class that will gather the weather update from api and parse to the application */
@@ -17,13 +18,8 @@ public class CountryWeatherThread extends Thread {
     }
 
     public WeatherRecordEvent generateEvent() {
-        // get data from API
-        // TODO: Get data from API (by parsing only country)
-        Country country1 = country;
-        float temperature1 = 11.11F;
-        boolean isWindy1 = true;
-
-        return new WeatherRecordEvent(country, temperature1, isWindy1);
+        WeatherRecord weatherRecord = ApiWeatherConnection.getWeatherData(country);
+        return new WeatherRecordEvent(weatherRecord);
     }
 
     public void publishEvent() {

@@ -115,7 +115,7 @@ public class HelloApplication extends Application {
         // ThreadWorkingExample(centralEventBus);
 
         // Simple steps that shows how starting/stopping threads works
-        // CountryWeatherTogglingExample(centralEventBus);
+        CountryWeatherTogglingExample(centralEventBus);
 
         // Simple steps that shows how changing register options works
         // TODO: After the database and register will work, implement events for changing options

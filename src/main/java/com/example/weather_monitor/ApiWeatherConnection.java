@@ -35,7 +35,7 @@ public class ApiWeatherConnection {
     public static void main(String[] args) {
         // Sample testing if everything works
 
-        String country = "Poland";
+        Country country = Country.Poland;
 
         WeatherRecord weatherRecord = getWeatherData(country);
         System.out.println(weatherRecord.toString());
@@ -61,7 +61,7 @@ public class ApiWeatherConnection {
         return null;
     }
 
-    public static WeatherRecord getWeatherData(String country) {
+    public static WeatherRecord getWeatherData(Country country) {
         String weatherData = getAllWeatherData(country);
         if (weatherData != null) {
             JSONObject jsonObject = new JSONObject(weatherData);
@@ -81,8 +81,8 @@ public class ApiWeatherConnection {
         return null;
     }
 
-    public static String getAllWeatherData(String country) {
-        String queryUrl = generateQueryUrl(country);
+    public static String getAllWeatherData(Country country) {
+        String queryUrl = generateQueryUrl(String.valueOf(country));
 
         try {
             URL url = new URL(Objects.requireNonNull(queryUrl));
