@@ -22,7 +22,7 @@ public class RegisterListener {
         while (!Thread.currentThread().isInterrupted()) {
             printRecords();
             try {
-                Thread.sleep(1000); // Wait for 1 second
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -87,7 +87,7 @@ public class RegisterListener {
                 clearAllRecordings();
             }
         }
-        // stopRecording();
+        stopRecording();
     }
 
     @Subscribe
@@ -105,10 +105,6 @@ public class RegisterListener {
             case clear_register -> clearAllRecordings();
             default -> throw new IllegalArgumentException("Wrong option: " + event.option());
         }
-        // TODO: start is running thread that gathers rows from database and prints them
-        // TODO: stop is stopping updating
-        // TODO: clear is clearing the viewed output
-        // TODO: optimize updating: print only new rows and maybe do scrolling (hide oldest, print new)
-        // TODO: be careful while clearing: it needs also clear the structure resposible for printing
+        // TODO: while recording will be updating the text field he have to do it with async CompletableFuture
     }
 }
