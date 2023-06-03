@@ -15,9 +15,8 @@ public class WeatherUpdatesListener {
     @Subscribe
     public void handleEvent(WeatherRecordEvent event) {
         System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());
-        // TODO: add record to the database
         try(DBManager dbManager = new DBManager()) {
-
+            dbManager.addRecord(event.weatherRecord());
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
