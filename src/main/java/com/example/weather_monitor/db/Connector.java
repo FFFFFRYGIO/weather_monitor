@@ -12,9 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Connector {
-    private final String connectionString;
+    private final Connection connection;
 
-    public Connector() throws IOException {
+    public Connector() throws IOException, SQLException {
         final Properties properties = new Properties();
         String propFileName = "config.properties";
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
@@ -25,36 +25,33 @@ public class Connector {
             throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
         }
 
-        this.connectionString = properties.getProperty("db.url");
+        final var connectionString = properties.getProperty("db.url");
+        final var dbUser = properties.getProperty("db.user");
+        final var dbPassword = properties.getProperty("db.password");
+
+        this.connection = DriverManager.getConnection(connectionString, dbUser, dbPassword);
+    }
+
+    public void printAllTables() throws SQLException {
+
+        DatabaseMetaData metadata = connection.getMetaData();
+        ResultSet tables = metadata.getTables(null, null, null, new String[]{"TABLE"});
+
+        System.out.println("Tables in the database:");
+        while (tables.next()) {
+            String tableName = tables.getString("TABLE_NAME");
+            System.out.println(tableName);
+        }
     }
 
     public static void main(String[] args) {
         // Sample testing if everything works
-
         Connector connector = null;
         try {
             connector = new Connector();
-        } catch (IOException e) {
+            connector.printAllTables();
+        } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
-        String connectionString = connector.getConnectionString();
-
-        try (Connection connection = DriverManager.getConnection(connectionString)) {
-            DatabaseMetaData metadata = connection.getMetaData();
-            ResultSet tables = metadata.getTables(null, null, null, new String[]{"TABLE"});
-
-            System.out.println("Tables in the database:");
-            while (tables.next()) {
-                String tableName = tables.getString("TABLE_NAME");
-                System.out.println(tableName);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public String getConnectionString() {
-        return connectionString;
     }
 }
