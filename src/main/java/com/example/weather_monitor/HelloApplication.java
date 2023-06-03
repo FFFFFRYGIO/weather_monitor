@@ -66,7 +66,7 @@ public class HelloApplication extends Application {
         6. Stop Poland
         */
 
-        List<RecordToggleEvent> recordToggleEvents = new ArrayList<>();
+        List<RecordToggleEvent> recordToggleEvents = new ArrayList<RecordToggleEvent>();
         recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
         recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
         recordToggleEvents.add(new RecordToggleEvent(Country.Germany));

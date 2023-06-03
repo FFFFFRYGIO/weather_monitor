@@ -11,7 +11,7 @@ import java.util.List;
 /* Listener for recording updates to start/stop threads for country weather recorders */
 public class CountryThreadsManageListener {
     private static int eventsHandled = 0;
-    List<CountryWeatherThread> workingCountryWeatherThreads = new ArrayList<>();
+    List<CountryWeatherThread> workingCountryWeatherThreads = new ArrayList<CountryWeatherThread>();
     private final CentralEventBus centralEventBus;
     private final int generalPeriod;
 

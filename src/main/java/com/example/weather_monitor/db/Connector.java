@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Connector {
     private final String connectionString;
@@ -24,6 +26,31 @@ public class Connector {
         }
 
         this.connectionString = properties.getProperty("db.url");
+    }
+
+    public static void main(String[] args) {
+        // Sample testing if everything works
+
+        Connector connector = null;
+        try {
+            connector = new Connector();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String connectionString = connector.getConnectionString();
+
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            ResultSet tables = metadata.getTables(null, null, null, new String[]{"TABLE"});
+
+            System.out.println("Tables in the database:");
+            while (tables.next()) {
+                String tableName = tables.getString("TABLE_NAME");
+                System.out.println(tableName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
