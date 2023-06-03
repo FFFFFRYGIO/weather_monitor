@@ -38,16 +38,17 @@ public class ApiWeatherConnection {
         Country country = Country.Poland;
 
         WeatherRecord weatherRecord = getWeatherData(country);
+
+        System.out.println("\n=== Weather Data Record Object ===");
         System.out.println(weatherRecord.toString());
 
         String weatherData = getAllWeatherData(country);
+        displayWeatherDataJSON(weatherData);
         try {
             displayWeatherDataNeeded(weatherData);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        // System.out.println();
-        // displayWeatherDataJSON(weatherData);
     }
 
     private static String loadApiKey() {
@@ -126,7 +127,7 @@ public class ApiWeatherConnection {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String prettyJson = gson.toJson(jsonObject);
 
-            System.out.println("Weather Data:");
+            System.out.println("\n=== Weather Data JSON ===");
             System.out.println(prettyJson);
         } else {
             System.out.println("Brak danych pogodowych.");
@@ -139,9 +140,8 @@ public class ApiWeatherConnection {
 
             if (jsonObject.has("main") && jsonObject.has("wind")) {
                 JSONObject mainObject = jsonObject.getJSONObject("main");
-                // JSONObject windObject = jsonObject.getJSONObject("wind");
 
-                System.out.println("=== Weather Data ===");
+                System.out.println("\n=== Weather Data Needed ===");
 
                 String name = jsonObject.getString("name");
                 System.out.println("Location: " + name);
@@ -159,8 +159,6 @@ public class ApiWeatherConnection {
 
                 System.out.println("Temperature: " + mainObject.getDouble("temp") + " °C");
                 System.out.println("Pressure: " + mainObject.getInt("pressure") + " hPa");
-                // System.out.println("Humidity: " + mainObject.getInt("humidity") + "%");
-                // System.out.println("Wind Speed: " + windObject.getDouble("speed") + " m/s");
 
                 JSONObject cloudsObject = jsonObject.getJSONObject("clouds");
                 System.out.println("Cloudiness: " + cloudsObject.getInt("all") + "%");
