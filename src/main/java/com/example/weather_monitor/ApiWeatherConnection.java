@@ -8,10 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -22,8 +18,6 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 /* Class with everything about API connection */
 public class ApiWeatherConnection {
@@ -40,9 +34,9 @@ public class ApiWeatherConnection {
         WeatherRecord weatherRecord = getWeatherData(country);
 
         System.out.println("\n=== Weather Data Record Object ===");
-        System.out.println(weatherRecord.toString());
+        System.out.println(weatherRecord);
 
-        String weatherData = getAllWeatherData(country);
+        JSONObject weatherData = getAllWeatherData(country);
         displayWeatherDataJSON(weatherData);
         try {
             displayWeatherDataNeeded(weatherData);
@@ -63,32 +57,30 @@ public class ApiWeatherConnection {
     }
 
     public static WeatherRecord getWeatherData(Country country) {
-        String weatherData = getAllWeatherData(country);
+        JSONObject weatherData = getAllWeatherData(country);
         if (weatherData != null) {
-            JSONObject jsonObject = new JSONObject(weatherData);
-            JSONObject mainObject = jsonObject.getJSONObject("main");
+
             WeatherRecord weatherRecord = new WeatherRecord();
 
-            String countryString = jsonObject.getString("name");
-            switch (countryString) {
-                case "Luxembourg Province" -> countryString = "Luxembourg";
-                case "Czech Republic" -> countryString = "Czechia";
-                case "Republic of Lithuania" -> countryString = "Lithuania";
-            }
+            String countryString = weatherData.getString("name");
+            countryString = switch (countryString) {
+                case "Luxembourg Province" -> "Luxembourg";
+                case "Czech Republic" -> "Czechia";
+                case "Republic of Lithuania" -> "Lithuania";
+                default -> countryString;
+            };
             weatherRecord.location = Country.valueOf(countryString);
-            var timestamp = Instant.ofEpochSecond(jsonObject.getLong("dt"));
-            weatherRecord.measurementTime = LocalDateTime.ofInstant(timestamp, ZoneId.systemDefault());
-            weatherRecord.weatherCondition = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main");
-            weatherRecord.temperature = mainObject.getDouble("temp");
-            weatherRecord.pressure = mainObject.getInt("pressure");
-            weatherRecord.cloudiness = jsonObject.getJSONObject("clouds").getInt("all");
+            weatherRecord.weatherCondition = weatherData.getJSONArray("weather").getJSONObject(0).getString("main");
+            weatherRecord.temperature = weatherData.getJSONObject("main").getDouble("temp");
+            weatherRecord.pressure = weatherData.getJSONObject("main").getInt("pressure");
+            weatherRecord.cloudiness = weatherData.getJSONObject("clouds").getInt("all");
 
             return weatherRecord;
         }
         return null;
     }
 
-    public static String getAllWeatherData(Country country) {
+    public static JSONObject getAllWeatherData(Country country) {
         String queryUrl = generateQueryUrl(String.valueOf(country));
 
         try {
@@ -109,7 +101,7 @@ public class ApiWeatherConnection {
                 reader.close();
                 connection.disconnect();
 
-                return response.toString();
+                return new JSONObject(response.toString());
             } else {
                 System.out.println("Failed to retrieve weather data. Response code: " + responseCode);
             }
@@ -125,22 +117,19 @@ public class ApiWeatherConnection {
         return BASE_URL + "?q=" + encodedCountry + "&appid=" + API_KEY + "&units=metric";
     }
 
-    public static void displayWeatherDataJSON(String weatherData) {
+    public static void displayWeatherDataJSON(JSONObject weatherData) {
         if (weatherData != null) {
-            JsonParser jsonParser = new JsonParser();
-            JsonObject jsonObject = jsonParser.parse(weatherData).getAsJsonObject();
-
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String prettyJson = gson.toJson(jsonObject);
+            String prettyJson = gson.toJson(weatherData);
 
             System.out.println("\n=== Weather Data JSON ===");
             System.out.println(prettyJson);
         } else {
-            System.out.println("Brak danych pogodowych.");
+            System.out.println("No weather data.");
         }
     }
 
-    public static void displayWeatherDataNeeded(String weatherData) throws Exception {
+    public static void displayWeatherDataNeeded(JSONObject weatherData) throws Exception {
         if (weatherData != null) {
             JSONObject jsonObject = new JSONObject(weatherData);
 
@@ -151,11 +140,6 @@ public class ApiWeatherConnection {
 
                 String name = jsonObject.getString("name");
                 System.out.println("Location: " + name);
-
-                long timestamp = jsonObject.getLong("dt");
-                LocalDateTime measurementTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.systemDefault());
-                String formattedTime = measurementTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-                System.out.println("Measurement Time: " + formattedTime);
 
                 JSONArray weatherArray = jsonObject.getJSONArray("weather");
                 if (weatherArray.length() > 0) {

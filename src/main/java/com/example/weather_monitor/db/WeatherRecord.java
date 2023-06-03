@@ -4,7 +4,9 @@ import com.example.weather_monitor.data.Country;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +18,6 @@ public class WeatherRecord {
     @GeneratedValue
     private Long id;
     public Country location;
-    public LocalDateTime measurementTime;
     public String weatherCondition;
     public double temperature;
     public int pressure;

@@ -94,23 +94,5 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-
-//        // CentralEventBus
-//        CentralEventBus centralEventBus = new CentralEventBus();
-//
-//        // CountryThreadsListener
-//        int generalPeriod = 250;
-//        CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, generalPeriod);
-//        centralEventBus.registerNewListener(countryThreadsManageListener);
-//
-//        // WeatherUpdatesListener
-//        WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
-//        centralEventBus.registerNewListener(weatherUpdatesListener);
-//
-//        // RegisterListener
-//        RegisterListener registerListener = new RegisterListener();
-//        centralEventBus.registerNewListener(registerListener);
-//
-//        System.out.println("DONE");
     }
 }
