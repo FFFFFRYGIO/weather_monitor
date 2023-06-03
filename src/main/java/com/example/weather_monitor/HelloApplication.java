@@ -1,7 +1,7 @@
 package com.example.weather_monitor;
 
 import com.example.weather_monitor.data.Country;
-import com.example.weather_monitor.event.RecordToggleEvent;
+import com.example.weather_monitor.event.CountryRecordToggleEvent;
 import com.example.weather_monitor.listener.CountryThreadsManageListener;
 import com.example.weather_monitor.listener.RegisterListener;
 import com.example.weather_monitor.listener.WeatherUpdatesListener;
@@ -66,22 +66,22 @@ public class HelloApplication extends Application {
         6. Stop Poland
         */
 
-        List<RecordToggleEvent> recordToggleEvents = new ArrayList<RecordToggleEvent>();
-        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
-        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
-        recordToggleEvents.add(new RecordToggleEvent(Country.Germany));
-        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
-        recordToggleEvents.add(new RecordToggleEvent(Country.Germany));
-        recordToggleEvents.add(new RecordToggleEvent(Country.Poland));
+        List<CountryRecordToggleEvent> countryRecordToggleEvents = new ArrayList<CountryRecordToggleEvent>();
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Germany));
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Germany));
+        countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
 
         int x = 0;
         long startTime = System.currentTimeMillis();
 
-        for(RecordToggleEvent recordToggleEvent : recordToggleEvents) {
+        for(CountryRecordToggleEvent countryRecordToggleEvent : countryRecordToggleEvents) {
 
             System.out.println(x + "Beggin " + (System.currentTimeMillis() - startTime));
 
-            centralEventBus.publishEventFromListener(recordToggleEvent);
+            centralEventBus.publishEventFromListener(countryRecordToggleEvent);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {

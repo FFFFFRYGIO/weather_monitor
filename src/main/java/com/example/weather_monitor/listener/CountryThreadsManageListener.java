@@ -2,7 +2,7 @@ package com.example.weather_monitor.listener;
 
 import com.example.weather_monitor.CentralEventBus;
 import com.example.weather_monitor.CountryWeatherThread;
-import com.example.weather_monitor.event.RecordToggleEvent;
+import com.example.weather_monitor.event.CountryRecordToggleEvent;
 import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class CountryThreadsManageListener {
         workingCountryWeatherThreads.remove(countryWeatherThread);
     }
 
-    private void startCountryWeatherThread(RecordToggleEvent event) {
+    private void startCountryWeatherThread(CountryRecordToggleEvent event) {
 
         // Create and start thread
         CountryWeatherThread countryWeatherThread = new CountryWeatherThread(centralEventBus, event.country(), generalPeriod);
@@ -47,7 +47,7 @@ public class CountryThreadsManageListener {
     }
 
     @Subscribe
-    public void handleEvent(RecordToggleEvent event) {
+    public void handleEvent(CountryRecordToggleEvent event) {
         System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());
         for(CountryWeatherThread countryWeatherThread : workingCountryWeatherThreads) {
             if(countryWeatherThread.getCountry() == event.country()){
