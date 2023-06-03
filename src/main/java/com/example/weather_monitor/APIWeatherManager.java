@@ -1,9 +1,6 @@
 package com.example.weather_monitor;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -20,11 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /* Class with everything about API connection */
-public class ApiWeatherConnection {
-    private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
-    private static final String API_KEY_PROPERTY = "api.key";
-    private static final String API_KEY = loadApiKey();
-    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+public class APIWeatherManager {
 
     public static void main(String[] args) {
         // Sample testing if everything works
@@ -43,17 +36,6 @@ public class ApiWeatherConnection {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static String loadApiKey() {
-        Properties properties = new Properties();
-        try (FileInputStream fileInputStream = new FileInputStream(CONFIG_FILE_PATH)) {
-            properties.load(fileInputStream);
-            return properties.getProperty(API_KEY_PROPERTY);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static WeatherRecord getWeatherData(Country country) {
@@ -80,16 +62,35 @@ public class ApiWeatherConnection {
         return null;
     }
 
-    public static JSONObject getAllWeatherData(Country country) {
-        String queryUrl = generateQueryUrl(String.valueOf(country));
+    // private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
 
+    public static URL generateQueryUrl(Country country) throws IOException {
+
+        final Properties properties = new Properties();
+        String propFileName = "config.properties";
+        InputStream inputStream = APIWeatherManager.class.getClassLoader().getResourceAsStream(propFileName);
+
+        if (inputStream != null) {
+            properties.load(inputStream);
+        } else {
+            throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+        }
+
+        String BASE_URL = properties.getProperty("api.url");
+        String API_KEY = properties.getProperty("api.key");
+
+        String encodedCountry = URLEncoder.encode(String.valueOf(country), StandardCharsets.UTF_8);
+        String queryUrl =  BASE_URL + "?q=" + encodedCountry + "&appid=" + API_KEY + "&units=metric";
+        return new URL(Objects.requireNonNull(queryUrl));
+    }
+
+    public static JSONObject getAllWeatherData(Country country) {
         try {
-            URL url = new URL(Objects.requireNonNull(queryUrl));
+            URL url = generateQueryUrl(country);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -103,19 +104,15 @@ public class ApiWeatherConnection {
 
                 return new JSONObject(response.toString());
             } else {
-                System.out.println("Failed to retrieve weather data. Response code: " + responseCode);
+                System.out.println("Failed to retrieve weather data. Response code: " + connection.getResponseCode());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
-    public static String generateQueryUrl(String country) {
-        String encodedCountry = URLEncoder.encode(country, StandardCharsets.UTF_8);
-        return BASE_URL + "?q=" + encodedCountry + "&appid=" + API_KEY + "&units=metric";
-    }
+
 
     public static void displayWeatherDataJSON(JSONObject weatherData) {
         if (weatherData != null) {

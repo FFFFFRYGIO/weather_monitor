@@ -18,7 +18,7 @@ public class CountryWeatherThread extends Thread {
     }
 
     public WeatherRecordEvent generateEvent() {
-        WeatherRecord weatherRecord = ApiWeatherConnection.getWeatherData(country);
+        WeatherRecord weatherRecord = APIWeatherManager.getWeatherData(country);
         return new WeatherRecordEvent(weatherRecord);
     }
 

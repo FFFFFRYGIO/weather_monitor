@@ -45,14 +45,6 @@ public class DBManager implements AutoCloseable {
         this.session = sessionFactory.openSession();
     }
 
-//    public void printAllTables() throws SQLException {
-//        String sqlQuery = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'";
-//
-//        session.createQuery(sqlQuery, String.class).list();
-//        System.out.println(session.createNativeQuery(sqlQuery, String.class).list());
-//
-//    }
-
     public void uploadInstanceToDatabase() throws IOException {
         Transaction transaction = session.beginTransaction();
         session.persist(new WeatherRecord());
