@@ -2,6 +2,7 @@ package com.example.weather_monitor.listener;
 
 import com.example.weather_monitor.CentralEventBus;
 import com.example.weather_monitor.CountryWeatherThread;
+import com.example.weather_monitor.HelloController;
 import com.example.weather_monitor.event.CountryRecordToggleEvent;
 import com.google.common.eventbus.Subscribe;
 
@@ -11,13 +12,28 @@ import java.util.List;
 /* Listener for recording updates to start/stop threads for country weather recorders */
 public class CountryThreadsManageListener {
     private static int eventsHandled = 0;
-    List<CountryWeatherThread> workingCountryWeatherThreads = new ArrayList<CountryWeatherThread>();
+    private static final List<CountryWeatherThread> workingCountryWeatherThreads = new ArrayList<>();
     private final CentralEventBus centralEventBus;
     private final int generalPeriod;
 
     public CountryThreadsManageListener(CentralEventBus centralEventBus, int generalPeriod) {
         this.centralEventBus = centralEventBus;
         this.generalPeriod = generalPeriod;
+    }
+
+    public static String getUpdateListOfMonitoredCountries() {
+        StringBuilder sb = new StringBuilder();
+        for (CountryWeatherThread countryThread : workingCountryWeatherThreads) {
+            sb.append(countryThread.getCountry()).append(", ");
+        }
+
+        // Delete last ", "
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 2);
+        }
+
+        String listOfMonitoredCountries = sb.toString();
+        return listOfMonitoredCountries;
     }
 
     private void stopCountryWeatherThread(CountryWeatherThread countryWeatherThread) {

@@ -111,15 +111,6 @@ public class HelloApplication extends Application {
 //        RegisterListener registerListener = new RegisterListener();
 //        centralEventBus.registerNewListener(registerListener);
 //
-//        // Simple steps that shows how threads works
-//        // ThreadWorkingExample(centralEventBus);
-//
-//        // Simple steps that shows how starting/stopping threads works
-//        CountryWeatherTogglingExample(centralEventBus);
-//
-//        // Simple steps that shows how changing register options works
-//        // TODO: After the database and register will work, implement events for changing options
-//
 //        System.out.println("DONE");
     }
 }

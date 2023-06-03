@@ -2,18 +2,21 @@ package com.example.weather_monitor;
 
 import com.example.weather_monitor.data.Country;
 import com.example.weather_monitor.event.CountryRecordToggleEvent;
+import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.example.weather_monitor.listener.CountryThreadsManageListener;
 import com.example.weather_monitor.listener.RegisterListener;
 import com.example.weather_monitor.listener.WeatherUpdatesListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import static com.example.weather_monitor.data.RegisterOption.clear_register;
+import static com.example.weather_monitor.data.RegisterOption.toggle_register;
 
 public class HelloController {
     private final CentralEventBus centralEventBus = new CentralEventBus();
@@ -99,7 +102,7 @@ public class HelloController {
     private Button clearRegisterButton;
 
     @FXML
-    private TextArea monitoredCountriesPrompt;
+    public TextField monitoredCountriesPrompt;
 
     @FXML
     private TextField registerPrompt;
@@ -114,16 +117,19 @@ public class HelloController {
         Country country = Country.valueOf(countryName);
         CountryRecordToggleEvent countryRecordToggleEvent = new CountryRecordToggleEvent(country);
         centralEventBus.publishEventFromListener(countryRecordToggleEvent);
+        monitoredCountriesPrompt.setText(CountryThreadsManageListener.getUpdateListOfMonitoredCountries());
     }
 
     @FXML
     void clearRegisterButtonHandle(ActionEvent event) {
-
+        RegisterConfigEvent registerConfigEvent = new RegisterConfigEvent(clear_register);
+        centralEventBus.publishEventFromListener(registerConfigEvent);
     }
 
     @FXML
     void startStopRegisterButtonHandle(ActionEvent event) {
-
+        RegisterConfigEvent registerConfigEvent = new RegisterConfigEvent(toggle_register);
+        centralEventBus.publishEventFromListener(registerConfigEvent);
     }
 
     @FXML
