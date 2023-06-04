@@ -23,28 +23,31 @@
                      <Image url="@images/europe_map.png" />
                   </image>
                </ImageView>
-               <VBox alignment="TOP_CENTER" prefHeight="580.0" prefWidth="280.0">
+               <VBox alignment="TOP_CENTER" prefHeight="472.0" prefWidth="335.0">
                   <children>
-                     <TextArea fx:id="registerPrompt" prefHeight="498.0" prefWidth="280.0" wrapText="true"/>
+                     <TextArea fx:id="registerPrompt" prefHeight="458.0" prefWidth="295.0" wrapText="true" />
                      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage register">
                               <VBox.margin>
-                                 <Insets left="10.0" right="10.0" top="5.0" />
+                                 <Insets />
                               </VBox.margin>
                            </Text>
                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                               <children>
                                  <Button fx:id="startStopRegisterButton" minWidth="100.0" mnemonicParsing="false" onAction="#startStopRegisterButtonHandle" text="Start/Stop" />
-                                 <Button fx:id="clearRegisterButton" minWidth="100.0" mnemonicParsing="false" onAction="#clearRegisterButtonHandle" text="Clear" />
+                                 <Button fx:id="clearRegisterButton" minWidth="100.0" mnemonicParsing="false" onAction="#clearRegisterButtonHandle" text="Clear">
+                                    <HBox.margin>
+                                       <Insets />
+                                    </HBox.margin></Button>
                               </children>
                               <VBox.margin>
-                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 <Insets />
                               </VBox.margin>
                            </HBox>
                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monitored countries:">
                               <VBox.margin>
-                                 <Insets left="10.0" right="10.0" />
+                                 <Insets />
                               </VBox.margin>
                            </Text>
                            <TextArea fx:id="monitoredCountriesPrompt" prefHeight="30.0" prefWidth="280.0" />
@@ -52,7 +55,7 @@
                      </VBox>
                   </children>
                   <HBox.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     <Insets bottom="10.0" right="10.0" top="10.0" />
                   </HBox.margin>
                </VBox>
             </children>
