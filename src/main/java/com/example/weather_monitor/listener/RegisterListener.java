@@ -54,6 +54,11 @@ public class RegisterListener {
         List<WeatherRecord> records = getRecords();
         int startIndex = Math.max(records.size() - maxRowsInRegister, 0);
 
+        if(startIndex == 0) {
+            weatherMonitorController.setRegisterPromptText("No records");
+            return;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = startIndex; i < records.size(); i++) {
             stringBuilder.append(records.get(i).toString()).append("\n");

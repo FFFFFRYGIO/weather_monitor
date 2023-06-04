@@ -21,6 +21,11 @@ public class CountryThreadsManageListener {
     }
 
     public static String getUpdateListOfMonitoredCountries() {
+
+        if(workingCountryWeatherThreads.size() == 0) {
+            return "No counties monitored";
+        }
+
         StringBuilder sb = new StringBuilder();
         for (CountryWeatherThread countryThread : workingCountryWeatherThreads) {
             sb.append(countryThread.getCountry()).append(", ");

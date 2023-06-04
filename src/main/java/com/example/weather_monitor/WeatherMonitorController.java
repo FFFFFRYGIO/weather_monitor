@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -82,7 +81,6 @@ public class WeatherMonitorController {
         centralEventBus.registerNewListener(countryThreadsManageListener);
         centralEventBus.registerNewListener(weatherUpdatesListener);
         centralEventBus.registerNewListener(registerListener);
+        monitoredCountriesPrompt.setText("No counties monitored");
     }
-
-
 }
