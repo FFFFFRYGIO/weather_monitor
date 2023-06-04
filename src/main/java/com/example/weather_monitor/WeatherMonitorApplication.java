@@ -14,7 +14,7 @@ import java.util.List;
 public class WeatherMonitorApplication extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WeatherMonitorApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WeatherMonitorApplication.class.getResource("weather_monitor-view.fxml"));
         Image icon = new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\icon.jpg");
         Scene scene = new Scene(fxmlLoader.load(), 1000, 492);
         stage.setTitle("Europe Weather Monitor");
