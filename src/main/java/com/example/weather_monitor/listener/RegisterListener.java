@@ -55,10 +55,8 @@ public class RegisterListener {
         int startIndex = Math.max(records.size() - maxRowsInRegister, 0);
 
         StringBuilder stringBuilder = new StringBuilder();
-        String record;
         for (int i = startIndex; i < records.size(); i++) {
-            record = records.get(i).location + ", " + records.get(i).weatherCondition + ", " + records.get(i).temperature + "°C, " + records.get(i).pressure + "hPa, " + records.get(i).cloudiness + "%";
-            stringBuilder.append(record).append("\n");
+            stringBuilder.append(records.get(i).toString()).append("\n");
         }
 
         String prompt = stringBuilder.toString();

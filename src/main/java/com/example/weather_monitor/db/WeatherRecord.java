@@ -24,4 +24,14 @@ public class WeatherRecord {
     public double temperature;
     public int pressure;
     public int cloudiness;
+
+    @Override
+    public String toString() {
+        return location +
+                ", " + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) +
+                ", " + weatherCondition +
+                ", " + temperature + " °C" +
+                ", " + pressure + " hPa" +
+                ", " + cloudiness + "%";
+    }
 }
