@@ -2,10 +2,6 @@ package com.example.weather_monitor;
 
 import com.example.weather_monitor.data.Country;
 import com.example.weather_monitor.event.CountryRecordToggleEvent;
-import com.example.weather_monitor.listener.CountryThreadsManageListener;
-import com.example.weather_monitor.listener.RegisterListener;
-import com.example.weather_monitor.listener.WeatherUpdatesListener;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -15,10 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelloApplication extends Application {
+public class WeatherMonitorApplication extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WeatherMonitorApplication.class.getResource("hello-view.fxml"));
         Image icon = new Image(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\icon.jpg");
         Scene scene = new Scene(fxmlLoader.load(), 1000, 492);
         stage.setTitle("Europe Weather Monitor");
@@ -66,7 +62,7 @@ public class HelloApplication extends Application {
         6. Stop Poland
         */
 
-        List<CountryRecordToggleEvent> countryRecordToggleEvents = new ArrayList<CountryRecordToggleEvent>();
+        List<CountryRecordToggleEvent> countryRecordToggleEvents = new ArrayList<>();
         countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
         countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Poland));
         countryRecordToggleEvents.add(new CountryRecordToggleEvent(Country.Germany));

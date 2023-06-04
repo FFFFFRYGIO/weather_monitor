@@ -2,7 +2,6 @@ package com.example.weather_monitor.listener;
 
 import com.example.weather_monitor.CentralEventBus;
 import com.example.weather_monitor.CountryWeatherThread;
-import com.example.weather_monitor.HelloController;
 import com.example.weather_monitor.event.CountryRecordToggleEvent;
 import com.google.common.eventbus.Subscribe;
 
@@ -32,8 +31,7 @@ public class CountryThreadsManageListener {
             sb.setLength(sb.length() - 2);
         }
 
-        String listOfMonitoredCountries = sb.toString();
-        return listOfMonitoredCountries;
+        return sb.toString();
     }
 
     private void stopCountryWeatherThread(CountryWeatherThread countryWeatherThread) {
