@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -18,6 +19,7 @@ public class WeatherRecord {
     @GeneratedValue
     private Long id;
     public Country location;
+    public LocalDateTime time;
     public String weatherCondition;
     public double temperature;
     public int pressure;

@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -52,6 +53,7 @@ public class APIWeatherManager {
                 default -> countryString;
             };
             weatherRecord.location = Country.valueOf(countryString);
+            weatherRecord.time = LocalDateTime.now();
             weatherRecord.weatherCondition = weatherData.getJSONArray("weather").getJSONObject(0).getString("main");
             weatherRecord.temperature = weatherData.getJSONObject("main").getDouble("temp");
             weatherRecord.pressure = weatherData.getJSONObject("main").getInt("pressure");
