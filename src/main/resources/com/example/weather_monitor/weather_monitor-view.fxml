@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,7 +25,7 @@
                </ImageView>
                <VBox alignment="TOP_CENTER" prefHeight="580.0" prefWidth="280.0">
                   <children>
-                     <TextField fx:id="registerPrompt" alignment="TOP_LEFT" prefHeight="419.0" prefWidth="280.0" text="1" />
+                     <TextArea fx:id="registerPrompt" prefHeight="498.0" prefWidth="280.0" wrapText="true"/>
                      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage register">
@@ -47,7 +47,7 @@
                                  <Insets left="10.0" right="10.0" />
                               </VBox.margin>
                            </Text>
-                           <TextField fx:id="monitoredCountriesPrompt" prefHeight="22.0" prefWidth="280.0" />
+                           <TextArea fx:id="monitoredCountriesPrompt" prefHeight="30.0" prefWidth="280.0" />
                         </children>
                      </VBox>
                   </children>

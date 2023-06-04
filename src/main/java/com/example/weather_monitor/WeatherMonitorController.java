@@ -9,7 +9,7 @@ import com.example.weather_monitor.listener.WeatherUpdatesListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,14 +40,15 @@ public class WeatherMonitorController {
     }
 
     public void setRegisterPromptText(String text) {
+        System.out.println("=== I AM IN setRegisterPromptText ===");
         registerPrompt.setText(text);
     }
 
     @FXML
-    public TextField monitoredCountriesPrompt;
+    public TextArea monitoredCountriesPrompt;
 
     @FXML
-    public TextField registerPrompt;
+    public TextArea registerPrompt;
 
     @FXML
     void CountryButtonHandle(ActionEvent event) {

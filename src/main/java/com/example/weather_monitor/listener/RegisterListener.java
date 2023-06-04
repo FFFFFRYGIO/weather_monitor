@@ -3,7 +3,6 @@ package com.example.weather_monitor.listener;
 import com.example.weather_monitor.WeatherMonitorController;
 import com.example.weather_monitor.db.DBManager;
 import com.example.weather_monitor.db.WeatherRecord;
-import com.example.weather_monitor.db.db_dummy;
 import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.google.common.eventbus.Subscribe;
 
@@ -19,7 +18,6 @@ public class RegisterListener {
         this.weatherMonitorController = weatherMonitorController;
     }
 
-    static db_dummy dummy = new db_dummy();
     private static final Thread recordingThread = new Thread(() -> {
         while (!Thread.currentThread().isInterrupted()) {
             printRecords();
@@ -31,8 +29,6 @@ public class RegisterListener {
         }
     });
     private static int eventsHandled = 0;
-
-
 
     private static List<WeatherRecord> getRecords() {
         try(DBManager dbManager = new DBManager()) {
@@ -46,14 +42,14 @@ public class RegisterListener {
         List<WeatherRecord> records = getRecords();
         int startIndex = Math.max(records.size() - 10, 0);
 
-        StringBuilder prompt = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = startIndex; i < records.size(); i++) {
-            prompt.append(records.get(i)).append("\n");
+            stringBuilder.append(records.get(i)).append("\n");
         }
 
-        String result = prompt.toString();
+        String prompt = stringBuilder.toString();
 
-        weatherMonitorController.setRegisterPromptText(result);
+        weatherMonitorController.setRegisterPromptText(prompt);
     }
 
     private static void startRecording() {
@@ -77,6 +73,7 @@ public class RegisterListener {
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
+        weatherMonitorController.setRegisterPromptText("No records");
     }
 
     public static void main(String[] args) {
@@ -86,7 +83,6 @@ public class RegisterListener {
         for(int i=0; i<100; i++) {
             WeatherRecord weatherRecord = new WeatherRecord();
             weatherRecord.setId((long) i);
-            dummy.addRecord(weatherRecord);
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
