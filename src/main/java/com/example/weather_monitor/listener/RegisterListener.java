@@ -1,33 +1,45 @@
 package com.example.weather_monitor.listener;
 
+import com.example.weather_monitor.APIWeatherManager;
 import com.example.weather_monitor.WeatherMonitorController;
 import com.example.weather_monitor.db.DBManager;
 import com.example.weather_monitor.db.WeatherRecord;
 import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.google.common.eventbus.Subscribe;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 /* Listener for register to manage changing its options */
 public class RegisterListener {
     private static WeatherMonitorController weatherMonitorController;
+    private static int maxRowsInRegister;
 
     public RegisterListener(WeatherMonitorController weatherMonitorController) {
         this.weatherMonitorController = weatherMonitorController;
-    }
 
-    private static final Thread recordingThread = new Thread(() -> {
-        while (!Thread.currentThread().isInterrupted()) {
-            printRecords();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+        final Properties properties = new Properties();
+        String propFileName = "config.properties";
+        InputStream inputStream = APIWeatherManager.class.getClassLoader().getResourceAsStream(propFileName);
+
+        try {
+            if (inputStream != null) {
+                properties.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    });
+
+        maxRowsInRegister = Integer.parseInt(properties.getProperty("max_rows_in_register"));
+
+    }
+    private static Thread recordingThread;
     private static int eventsHandled = 0;
 
     private static List<WeatherRecord> getRecords() {
@@ -40,11 +52,13 @@ public class RegisterListener {
 
     private static void printRecords() {
         List<WeatherRecord> records = getRecords();
-        int startIndex = Math.max(records.size() - 10, 0);
+        int startIndex = Math.max(records.size() - maxRowsInRegister, 0);
 
         StringBuilder stringBuilder = new StringBuilder();
+        String record;
         for (int i = startIndex; i < records.size(); i++) {
-            stringBuilder.append(records.get(i)).append("\n");
+            record = records.get(i).location + ", " + records.get(i).weatherCondition + ", " + records.get(i).temperature + "°C, " + records.get(i).pressure + "hPa, " + records.get(i).cloudiness + "%";
+            stringBuilder.append(record).append("\n");
         }
 
         String prompt = stringBuilder.toString();
@@ -53,6 +67,16 @@ public class RegisterListener {
     }
 
     private static void startRecording() {
+        recordingThread = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                printRecords();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
         recordingThread.start();
     }
 
@@ -101,7 +125,7 @@ public class RegisterListener {
 
         switch (event.option()) {
             case toggle_register -> {
-                if(recordingThread.isAlive()) {
+                if(recordingThread != null && recordingThread.isAlive()) {
                     stopRecording();
                 } else {
                     startRecording();

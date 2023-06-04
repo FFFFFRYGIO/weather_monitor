@@ -11,8 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import static com.example.weather_monitor.data.RegisterOption.clear_register;
@@ -27,28 +28,32 @@ public class WeatherMonitorController {
 
 
     private static int loadGeneralPeriod() {
-        String configFilePath = "src/main/resources/config.properties";
-        String generalPeriodProperty = "general_period";
-        Properties properties = new Properties();
-        try (FileInputStream fileInputStream = new FileInputStream(configFilePath)) {
-            properties.load(fileInputStream);
-            return Integer.parseInt(properties.getProperty(generalPeriodProperty));
-        } catch (IOException e) {
+        final Properties properties = new Properties();
+        String propFileName = "config.properties";
+        InputStream inputStream = APIWeatherManager.class.getClassLoader().getResourceAsStream(propFileName);
+
+        try {
+            if (inputStream != null) {
+                properties.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+
+        return Integer.parseInt(properties.getProperty("general_period"));
     }
 
     public void setRegisterPromptText(String text) {
-        System.out.println("=== I AM IN setRegisterPromptText ===");
         registerPrompt.setText(text);
     }
 
     @FXML
-    public TextArea monitoredCountriesPrompt;
+    private TextArea monitoredCountriesPrompt;
 
     @FXML
-    public TextArea registerPrompt;
+    private TextArea registerPrompt;
 
     @FXML
     void CountryButtonHandle(ActionEvent event) {

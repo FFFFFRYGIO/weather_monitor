@@ -62,8 +62,6 @@ public class APIWeatherManager {
         return null;
     }
 
-    // private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
-
     public static URL generateQueryUrl(Country country) throws IOException {
 
         final Properties properties = new Properties();
