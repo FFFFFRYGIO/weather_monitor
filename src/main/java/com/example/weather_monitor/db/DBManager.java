@@ -21,6 +21,7 @@ import java.sql.SQLException;
 public class DBManager implements AutoCloseable {
     private final Session session;
     private final SessionFactory sessionFactory;
+    private final int maxRowsInRegister;
 
     public DBManager() throws IOException, SQLException {
         final Properties properties = new Properties();
@@ -43,6 +44,8 @@ public class DBManager implements AutoCloseable {
 
         this.sessionFactory = configuration.buildSessionFactory();
         this.session = sessionFactory.openSession();
+
+        maxRowsInRegister = Integer.parseInt(properties.getProperty("max_rows_in_register"));
     }
 
     public void uploadInstanceToDatabase() throws IOException {
@@ -58,6 +61,8 @@ public class DBManager implements AutoCloseable {
     }
 
     public List<WeatherRecord> getRecords() {
+        // TODO: order by time
+        // TODO: get only maxRowsInRegister
         Query<WeatherRecord> query = session.createQuery("FROM WeatherRecord", WeatherRecord.class);
         return query.list();
     }
