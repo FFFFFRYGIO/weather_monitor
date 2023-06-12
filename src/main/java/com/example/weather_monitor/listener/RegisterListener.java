@@ -52,12 +52,13 @@ public class RegisterListener {
 
     private static void printRecords() {
         List<WeatherRecord> records = getRecords();
-        int startIndex = Math.max(records.size() - maxRowsInRegister, 0);
 
-        if(startIndex == 0) {
+        if(records.size() == 0) {
             weatherMonitorController.setRegisterPromptText("No records");
             return;
         }
+
+        int startIndex = Math.max(records.size() - maxRowsInRegister, 0);
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = startIndex; i < records.size(); i++) {
