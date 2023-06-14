@@ -19,7 +19,6 @@ import static com.example.weather_monitor.data.RegisterOption.clear_register;
 import static com.example.weather_monitor.data.RegisterOption.toggle_register;
 
 public class WeatherMonitorController {
-    // TODO: usage of Reflexion API
     // TODO: Apache Commons library usage
     private final CentralEventBus centralEventBus = new CentralEventBus();
     private static final int GENERAL_PERIOD = loadGeneralPeriod();

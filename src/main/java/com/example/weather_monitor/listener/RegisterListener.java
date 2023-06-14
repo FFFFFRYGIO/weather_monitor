@@ -138,6 +138,5 @@ public class RegisterListener {
             case clear_register -> clearAllRecords();
             default -> throw new IllegalArgumentException("Wrong option: " + event.option());
         }
-        // TODO: while recording will be updating the text field he have to do it with async CompletableFuture
     }
 }
