@@ -11,6 +11,7 @@ module com.example.weather_monitor {
     requires com.google.gson;
     requires org.hibernate.orm.core;
     requires java.naming;
+    requires org.apache.commons.io;
 
     exports com.example.weather_monitor.data;
     exports com.example.weather_monitor.db;
