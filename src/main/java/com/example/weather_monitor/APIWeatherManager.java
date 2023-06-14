@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.apache.commons.lang3.StringUtils;
+
 /* Class with everything about API connection */
 public class APIWeatherManager {
 
@@ -46,12 +48,14 @@ public class APIWeatherManager {
             WeatherRecord weatherRecord = new WeatherRecord();
 
             String countryString = weatherData.getString("name");
-            countryString = switch (countryString) {
-                case "Luxembourg Province" -> "Luxembourg";
-                case "Czech Republic" -> "Czechia";
-                case "Republic of Lithuania" -> "Lithuania";
-                default -> countryString;
-            };
+            if(StringUtils.containsWhitespace(countryString)) {
+                countryString = switch (countryString) {
+                    case "Luxembourg Province" -> "Luxembourg";
+                    case "Czech Republic" -> "Czechia";
+                    case "Republic of Lithuania" -> "Lithuania";
+                    default -> countryString;
+                };
+            }
             weatherRecord.location = Country.valueOf(countryString);
             weatherRecord.time = LocalDateTime.now();
             weatherRecord.weatherCondition = weatherData.getJSONArray("weather").getJSONObject(0).getString("main");
