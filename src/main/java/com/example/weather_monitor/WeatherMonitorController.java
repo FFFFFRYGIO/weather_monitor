@@ -89,6 +89,7 @@ public class WeatherMonitorController {
         centralEventBus.registerNewListener(weatherUpdatesListener);
         centralEventBus.registerNewListener(registerListener);
         monitoredCountriesPrompt.setText("No counties monitored");
+        registerPrompt.setText("No records");
     }
 
     public void setWeatherPromptData(WeatherRecord weatherRecord) {
