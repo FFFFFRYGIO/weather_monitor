@@ -65,26 +65,327 @@
    </VBox>
    <AnchorPane layoutX="14.0" layoutY="13.0" prefHeight="472.0" prefWidth="680.0">
       <children>
-         <Button fx:id="buttonGermany" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Germany" />
-         <Button fx:id="buttonPoland" layoutX="480.0" layoutY="140.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Poland" />
-         <Button fx:id="buttonLithuania" layoutX="600.0" layoutY="14.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Lithuania" />
-         <Button fx:id="buttonCzechia" layoutX="350.0" layoutY="250.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Czechia" />
-         <Button fx:id="buttonNetherlands" layoutX="67.0" layoutY="128.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Netherlands" />
-         <Button fx:id="buttonBelgium" layoutX="37.0" layoutY="200.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belgium" />
-         <Button fx:id="buttonFrance" layoutX="37.0" layoutY="334.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="France" />
-         <Button fx:id="buttonSwitzerland" layoutX="137.0" layoutY="378.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Switzerland" />
-         <Button fx:id="buttonAustia" layoutX="340.0" layoutY="347.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Austria" />
-         <Button fx:id="buttonHungary" layoutX="486.0" layoutY="372.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Hungary" />
-         <Button fx:id="buttonSlovenia" layoutX="350.0" layoutY="415.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovenia" />
-         <Button fx:id="buttonItaly" layoutX="254.0" layoutY="428.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Italy" />
-         <Button fx:id="buttonLuxembourg" layoutX="75.0" layoutY="250.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Luxembourg" />
-         <Button fx:id="buttonCroatia" layoutX="411.0" layoutY="441.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Croatia" />
-         <Button fx:id="buttonSerbia" layoutX="509.0" layoutY="429.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Serbia" />
-         <Button fx:id="buttonRomania" layoutX="589.0" layoutY="403.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Romania" />
-         <Button fx:id="buttonUkraine" layoutX="609.0" layoutY="278.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Ukraine" />
-         <Button fx:id="buttonBelarus" layoutX="610.0" layoutY="116.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belarus" />
-         <Button fx:id="buttonDenmark" layoutX="182.0" layoutY="14.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Denmark" />
-         <Button fx:id="buttonSlovakia" layoutX="479.0" layoutY="297.0" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovakia" />
+
+         <VBox alignment="TOP_CENTER" layoutX="484.0" layoutY="139.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonPoland" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Poland" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="PolandTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="PolandWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="200.0" layoutY="150.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonGermany" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Germany" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="GermanyTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="GermanyWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="589.0" layoutY="28.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonLithuania" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Lithuania" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="LithuaniaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="LithuaniaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="341.0" layoutY="229.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonCzechia" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Czechia" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="CzechiaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="CzechiaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="75.0" layoutY="111.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonNetherlands" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Netherlands" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="NetherlandsTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="NetherlandsWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="32.0" layoutY="185.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonBelgium" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belgium" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="BelgiumTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="BelgiumWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="37.0" layoutY="319.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonFrance" mnemonicParsing="false" onAction="#CountryButtonHandle" text="France" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="FranceTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="FranceWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="137.0" layoutY="378.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonSwitzerland" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Switzerland" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="SwitzerlandTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="SwitzerlandWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="331.0" layoutY="334.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonAustria" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Austria" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="AustriaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="AustriaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="497.0" layoutY="347.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonHungary" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Hungary" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="HungaryTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="HungaryWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+                     <VBox alignment="TOP_CENTER" layoutX="311.0" layoutY="403.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonSlovenia" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovenia" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="SloveniaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="SloveniaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+               <VBox alignment="TOP_CENTER" layoutX="225.0" layoutY="415.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonItaly" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Italy" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="ItalyTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="ItalyWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="75.0" layoutY="239.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonLuxembourg" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Luxembourg" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="LuxembourgTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="LuxembourgWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="497.0" layoutY="421.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonSerbia" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Serbia" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="SerbiaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="SerbiaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="589.0" layoutY="403.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonRomania" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Romania" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="RomaniaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="RomaniaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="589.0" layoutY="257.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonUkraine" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Ukraine" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="UkraineTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="UkraineWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="595.0" layoutY="111.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonBelarus" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Belarus" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="BelarusTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="BelarusWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="182.0" layoutY="14.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonDenmark" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Denmark" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="DenmarkTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="DenmarkWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <VBox alignment="TOP_CENTER" layoutX="473.0" layoutY="279.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonSlovakia" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Slovakia" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="SlovakiaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="SlovakiaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+                     <VBox alignment="TOP_CENTER" layoutX="408.0" layoutY="407.0" prefHeight="57.0" prefWidth="86.0">
+            <children>
+               <Button fx:id="buttonCroatia" mnemonicParsing="false" onAction="#CountryButtonHandle" text="Croatia" />
+               <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="159.0">
+                  <children>
+                     <Text fx:id="CroatiaTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <ImageView fx:id="CroatiaWeatherImage" fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+         
       </children>
    </AnchorPane>
 </AnchorPane>
