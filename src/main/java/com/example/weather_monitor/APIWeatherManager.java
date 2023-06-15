@@ -97,7 +97,6 @@ public class APIWeatherManager {
         return null;
     }
 
-
     public static void displayWeatherDataJSON(JSONObject weatherData) {
         if (weatherData != null) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -107,38 +106,6 @@ public class APIWeatherManager {
             System.out.println(prettyJson);
         } else {
             System.out.println("No weather data.");
-        }
-    }
-
-    public static void displayWeatherDataNeeded(JSONObject weatherData) throws Exception {
-        if (weatherData != null) {
-            JSONObject jsonObject = new JSONObject(weatherData);
-
-            if (jsonObject.has("main") && jsonObject.has("wind")) {
-                JSONObject mainObject = jsonObject.getJSONObject("main");
-
-                System.out.println("\n=== Weather Data Needed ===");
-
-                String name = jsonObject.getString("name");
-                System.out.println("Location: " + name);
-
-                JSONArray weatherArray = jsonObject.getJSONArray("weather");
-                if (weatherArray.length() > 0) {
-                    JSONObject weatherObject = weatherArray.getJSONObject(0);
-                    System.out.println("Weather Condition: " + weatherObject.getString("main"));
-                }
-
-                System.out.println("Temperature: " + mainObject.getDouble("temp") + " °C");
-                System.out.println("Pressure: " + mainObject.getInt("pressure") + " hPa");
-
-                JSONObject cloudsObject = jsonObject.getJSONObject("clouds");
-                System.out.println("Cloudiness: " + cloudsObject.getInt("all") + "%");
-
-            } else {
-                throw new Exception("Failed to print weather data");
-            }
-        } else {
-            throw new Exception("No weather data");
         }
     }
 }
