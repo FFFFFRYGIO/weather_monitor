@@ -1,0 +1,16 @@
+1. "Clear" - czyste niebo, brak chmur.			3 3
+2. "Clouds" - zachmurzenie.				1 1
+3. "Drizzle" - mżawka, delikatny deszcz.		2 1
+4. "Rain" - deszcz.					2 2
+5. "Thunderstorm" - burza.				1 4
+6. "Snow" - śnieg.					2 3
+7. "Mist" - mgła.					1 3
+8. "Smoke" - dym.					4 4
+9. "Haze" - mgła lub lekki osad pyłu w powietrzu.	4 4
+10. "Dust" - pył w powietrzu.				4 4
+11. "Fog" - gęsta mgła.					1 3
+12. "Sand" - piasek w powietrzu.			4 4
+13. "Ash" - pył wulkaniczny.				4 4
+14. "Squall" - porywisty wiatr.				4 2
+15. "Tornado" - tornado.				4 4
+							w k
