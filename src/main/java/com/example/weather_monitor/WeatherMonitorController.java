@@ -1,6 +1,7 @@
 package com.example.weather_monitor;
 
 import com.example.weather_monitor.data.Country;
+import com.example.weather_monitor.db.WeatherRecord;
 import com.example.weather_monitor.event.CountryRecordToggleEvent;
 import com.example.weather_monitor.event.RegisterConfigEvent;
 import com.example.weather_monitor.listener.CountryThreadsManageListener;
@@ -10,6 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
