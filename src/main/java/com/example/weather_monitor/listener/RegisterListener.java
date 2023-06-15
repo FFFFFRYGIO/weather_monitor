@@ -105,25 +105,6 @@ public class RegisterListener {
         weatherMonitorController.setRegisterPromptText("No records");
     }
 
-    public static void main(String[] args) {
-        // Sample testing if everything works
-        startRecording();
-
-        for(int i=0; i<100; i++) {
-            WeatherRecord weatherRecord = new WeatherRecord();
-            weatherRecord.setId((long) i);
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if(i%30 == 0) {
-                clearAllRecords();
-            }
-        }
-        stopRecording();
-    }
-
     @Subscribe
     public void handleEvent(RegisterConfigEvent event) {
         System.out.println(this.getClass().getSimpleName() + " " + eventsHandled++ + ": " + event.toString());

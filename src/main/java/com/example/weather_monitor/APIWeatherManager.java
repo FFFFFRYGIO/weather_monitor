@@ -22,25 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 /* Class with everything about API connection */
 public class APIWeatherManager {
 
-    public static void main(String[] args) {
-        // Sample testing if everything works
-
-        Country country = Country.Czechia;
-
-        WeatherRecord weatherRecord = getWeatherData(country);
-
-        System.out.println("\n=== Weather Data Record Object ===");
-        System.out.println(weatherRecord);
-
-        JSONObject weatherData = getAllWeatherData(country);
-        displayWeatherDataJSON(weatherData);
-        try {
-            displayWeatherDataNeeded(weatherData);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static WeatherRecord getWeatherData(Country country) {
         JSONObject weatherData = getAllWeatherData(country);
         if (weatherData != null) {
