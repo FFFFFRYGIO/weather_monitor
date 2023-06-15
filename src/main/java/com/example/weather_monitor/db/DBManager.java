@@ -12,10 +12,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBManager implements AutoCloseable {
@@ -48,7 +44,7 @@ public class DBManager implements AutoCloseable {
         maxRowsInRegister = Integer.parseInt(properties.getProperty("max_rows_in_register"));
     }
 
-    public void uploadInstanceToDatabase() throws IOException {
+    public void uploadInstanceToDatabase() {
         Transaction transaction = session.beginTransaction();
         session.persist(new WeatherRecord());
         transaction.commit();
@@ -70,22 +66,6 @@ public class DBManager implements AutoCloseable {
         Transaction transaction = session.beginTransaction();
         session.createQuery("DELETE FROM WeatherRecord").executeUpdate();
         transaction.commit();
-    }
-
-    public static void main(String[] args) {
-        try(DBManager dbManager = new DBManager()) {
-            for(int i=0; i<5; i++) {
-                dbManager.addRecord(new WeatherRecord());
-                List<WeatherRecord> records = dbManager.getRecords();
-                System.out.println(records);
-            }
-            dbManager.clearRecords();
-            List<WeatherRecord> records = dbManager.getRecords();
-            System.out.println(records);
-        } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     @Override
