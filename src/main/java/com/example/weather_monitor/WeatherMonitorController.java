@@ -23,9 +23,15 @@ public class WeatherMonitorController {
     private final CentralEventBus centralEventBus = new CentralEventBus();
     private static final int GENERAL_PERIOD = loadGeneralPeriod();
     private final CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, GENERAL_PERIOD);
-    private final WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener();
+    private final WeatherUpdatesListener weatherUpdatesListener = new WeatherUpdatesListener(this);
     private final RegisterListener registerListener = new RegisterListener(this);
+    @FXML
+    private AnchorPane rootPane;
+    private final String weatherImageSource = System.getProperty("user.dir") +  "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\weather\\";
 
+    public void setRootPane(AnchorPane rootPane) {
+        this.rootPane = rootPane;
+    }
 
     private static int loadGeneralPeriod() {
         final Properties properties = new Properties();
