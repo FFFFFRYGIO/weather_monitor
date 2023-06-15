@@ -90,4 +90,14 @@ public class WeatherMonitorController {
         centralEventBus.registerNewListener(registerListener);
         monitoredCountriesPrompt.setText("No counties monitored");
     }
+
+    public void setWeatherPromptData(WeatherRecord weatherRecord) {
+        String countryName = weatherRecord.location.toString();
+
+        Text temperatureText = (Text) rootPane.lookup("#" + countryName + "TemperatureText");
+        ImageView weatherImage = (ImageView) rootPane.lookup("#" + countryName + "WeatherImage");
+
+        temperatureText.setText(weatherRecord.temperature + "°C");
+        weatherImage.setImage(new Image(weatherImageSource + StringUtils.capitalize(weatherRecord.weatherCondition) + ".png"));
+    }
 }
