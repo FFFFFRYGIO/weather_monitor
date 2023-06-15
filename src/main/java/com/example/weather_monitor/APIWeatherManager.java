@@ -11,7 +11,6 @@ import java.util.Properties;
 
 import com.example.weather_monitor.data.Country;
 import com.example.weather_monitor.db.WeatherRecord;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
