@@ -25,7 +25,6 @@ import static com.example.weather_monitor.data.RegisterOption.clear_register;
 import static com.example.weather_monitor.data.RegisterOption.toggle_register;
 
 public class WeatherMonitorController {
-    // TODO: Apache Commons library usage
     private final CentralEventBus centralEventBus = new CentralEventBus();
     private static final int GENERAL_PERIOD = loadGeneralPeriod();
     private final CountryThreadsManageListener countryThreadsManageListener = new CountryThreadsManageListener(centralEventBus, GENERAL_PERIOD);
@@ -33,7 +32,7 @@ public class WeatherMonitorController {
     private final RegisterListener registerListener = new RegisterListener(this);
     @FXML
     private AnchorPane rootPane;
-    private final String weatherImageSource = System.getProperty("user.dir") +  "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\weather\\";
+    private final String weatherImageSource = System.getProperty("user.dir") + "\\src\\main\\resources\\com\\example\\weather_monitor\\images\\weather\\";
 
     public void setRootPane(AnchorPane rootPane) {
         this.rootPane = rootPane;

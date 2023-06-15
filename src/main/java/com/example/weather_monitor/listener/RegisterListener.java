@@ -39,11 +39,12 @@ public class RegisterListener {
         maxRowsInRegister = Integer.parseInt(properties.getProperty("max_rows_in_register"));
 
     }
+
     private static Thread recordingThread;
     private static int eventsHandled = 0;
 
     private static List<WeatherRecord> getRecords() {
-        try(DBManager dbManager = new DBManager()) {
+        try (DBManager dbManager = new DBManager()) {
             return dbManager.getRecords();
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
@@ -53,7 +54,7 @@ public class RegisterListener {
     private static void printRecords() {
         List<WeatherRecord> records = getRecords();
 
-        if(records.size() == 0) {
+        if (records.size() == 0) {
             weatherMonitorController.setRegisterPromptText("No records");
             return;
         }
@@ -97,7 +98,7 @@ public class RegisterListener {
     }
 
     private static void clearAllRecords() {
-        try(DBManager dbManager = new DBManager()) {
+        try (DBManager dbManager = new DBManager()) {
             dbManager.clearRecords();
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
@@ -111,7 +112,7 @@ public class RegisterListener {
 
         switch (event.option()) {
             case toggle_register -> {
-                if(recordingThread != null && recordingThread.isAlive()) {
+                if (recordingThread != null && recordingThread.isAlive()) {
                     stopRecording();
                 } else {
                     startRecording();

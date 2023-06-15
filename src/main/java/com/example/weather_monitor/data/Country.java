@@ -22,4 +22,4 @@ public enum Country {
     Denmark,
     Slovakia,
     Czechia
-    }
+}

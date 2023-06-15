@@ -29,7 +29,7 @@ public class APIWeatherManager {
             WeatherRecord weatherRecord = new WeatherRecord();
 
             String countryString = weatherData.getString("name");
-            if(StringUtils.containsWhitespace(countryString)) {
+            if (StringUtils.containsWhitespace(countryString)) {
                 countryString = switch (countryString) {
                     case "Luxembourg Province" -> "Luxembourg";
                     case "Czech Republic" -> "Czechia";
@@ -65,7 +65,7 @@ public class APIWeatherManager {
         String API_KEY = properties.getProperty("api.key");
 
         String encodedCountry = URLEncoder.encode(String.valueOf(country), StandardCharsets.UTF_8);
-        String queryUrl =  BASE_URL + "?q=" + encodedCountry + "&appid=" + API_KEY + "&units=metric";
+        String queryUrl = BASE_URL + "?q=" + encodedCountry + "&appid=" + API_KEY + "&units=metric";
         return new URL(Objects.requireNonNull(queryUrl));
     }
 
@@ -96,7 +96,6 @@ public class APIWeatherManager {
         }
         return null;
     }
-
 
 
     public static void displayWeatherDataJSON(JSONObject weatherData) {
