@@ -61,8 +61,8 @@ public class DBManager implements AutoCloseable {
     }
 
     public List<WeatherRecord> getRecords() {
-        // TODO: order by time
-        Query<WeatherRecord> query = session.createQuery("FROM WeatherRecord", WeatherRecord.class);
+        Query<WeatherRecord> query = session.createQuery("FROM WeatherRecord ORDER BY time DESC", WeatherRecord.class);
+        query.setMaxResults(maxRowsInRegister);
         return query.list();
     }
 
