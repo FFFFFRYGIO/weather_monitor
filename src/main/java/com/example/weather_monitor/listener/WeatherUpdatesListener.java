@@ -14,7 +14,7 @@ public class WeatherUpdatesListener {
     private static WeatherMonitorController weatherMonitorController;
 
     public WeatherUpdatesListener(WeatherMonitorController weatherMonitorController) {
-        this.weatherMonitorController = weatherMonitorController;
+        WeatherUpdatesListener.weatherMonitorController = weatherMonitorController;
     }
 
     @Subscribe

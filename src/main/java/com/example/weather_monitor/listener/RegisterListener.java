@@ -20,7 +20,7 @@ public class RegisterListener {
     private static int maxRowsInRegister;
 
     public RegisterListener(WeatherMonitorController weatherMonitorController) {
-        this.weatherMonitorController = weatherMonitorController;
+        RegisterListener.weatherMonitorController = weatherMonitorController;
 
         final Properties properties = new Properties();
         String propFileName = "config.properties";
