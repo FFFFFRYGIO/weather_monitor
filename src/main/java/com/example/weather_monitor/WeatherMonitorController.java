@@ -78,13 +78,13 @@ public class WeatherMonitorController {
     }
 
     @FXML
-    void clearRegisterButtonHandle(ActionEvent event) {
+    void clearRegisterButtonHandle() {
         RegisterConfigEvent registerConfigEvent = new RegisterConfigEvent(clear_register);
         centralEventBus.publishEventFromListener(registerConfigEvent);
     }
 
     @FXML
-    void startStopRegisterButtonHandle(ActionEvent event) {
+    void startStopRegisterButtonHandle() {
         RegisterConfigEvent registerConfigEvent = new RegisterConfigEvent(toggle_register);
         centralEventBus.publishEventFromListener(registerConfigEvent);
     }
