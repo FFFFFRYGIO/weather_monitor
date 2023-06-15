@@ -1,7 +1,5 @@
 package com.example.weather_monitor.db;
 
-import com.example.weather_monitor.APIWeatherManager;
-import com.example.weather_monitor.data.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -78,8 +76,7 @@ public class DBManager implements AutoCloseable {
     public static void main(String[] args) {
         try(DBManager dbManager = new DBManager()) {
             for(int i=0; i<5; i++) {
-                WeatherRecord weatherRecord = APIWeatherManager.getWeatherData(Country.Poland);
-                dbManager.addRecord(weatherRecord);
+                dbManager.addRecord(new WeatherRecord());
                 List<WeatherRecord> records = dbManager.getRecords();
                 System.out.println(records);
             }
