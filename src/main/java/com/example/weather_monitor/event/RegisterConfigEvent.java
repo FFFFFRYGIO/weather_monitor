@@ -1,6 +1,5 @@
 package com.example.weather_monitor.event;
 
-
 import com.example.weather_monitor.data.RegisterOption;
 
 /* Event to parse register options changes */
